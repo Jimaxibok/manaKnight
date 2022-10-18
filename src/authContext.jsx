@@ -36,13 +36,12 @@ const reducer = (state, action) => {
 
 let sdk = new MkdSDK();
 
-export const tokenExpireError = (dispatch, errorMessage) => {
-  const role = localStorage.getItem("role");
-  if (errorMessage === "TOKEN_EXPIRED") {
-    dispatch({
-      type: "Logout",
-    });
-    window.location.href = "/" + role + "/login";
+
+export const tokenExpireError = async (dispatch) => {
+  const { role } = JSON.parse(localStorage.getItem("user"));
+  const { message } = await sdk.isTokenValid(role)
+  if (message === "TOKEN_EXPIRED") {
+   logOut(dispatch, role)
   }
 };
 
@@ -54,11 +53,10 @@ export const setUser = (dispatch, user) => {
   });
 }
 
-export const logOut = () => {
+export const logOut = (dispatch, role) => {
   dispatch({
-    type: "Logout",
+    type: "LOGOUT",
   });
-  window.location.href = "/" + role + "/login";
 }
 
 const AuthProvider = ({ children }) => {

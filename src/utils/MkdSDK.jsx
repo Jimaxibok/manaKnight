@@ -25,6 +25,10 @@ export default function MkdSDK() {
 
   };
 
+  this.isTokenValid = async function (role) {
+    return await this.callRestAPI({ role }, "TOKENEXPIRE")
+  }
+
   this.getHeader = function () {
     return {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -109,6 +113,26 @@ export default function MkdSDK() {
             throw new Error(jsonLogin.message);
           }
           return jsonLogin;
+
+        case "TOKENEXPIRE":
+          const getTokenResult = await fetch(
+            this._baseurl + `/v2/api/lambda/check`,
+            {
+              method: "post",
+              headers: header,
+              body: JSON.stringify(payload),
+            }
+          );
+          const jsonExpire = await getTokenResult.json();
+  
+          if (jsonExpire.status === 401) {
+            throw new Error(jsonExpire.message);
+          }
+  
+          if (jsonExpire.status === 403) {
+            throw new Error(jsonExpire.message);
+          }
+          return jsonExpire;
       default:
         break;
     }

@@ -12,6 +12,26 @@ code {
     monospace;
 }
 
+.dashboard-container{
+  background: rgb(10, 9, 9);
+  color: white;
+}
+
+#sub-date{
+  background: rgb(46, 45, 45);
+  /* text-align: center; */
+  align-items: center;
+  color:gray;
+  border-radius: 10px;
+  height:40px;
+}
+#sub-date span{
+  background:lightgreen;
+  color: black;
+  font-weight: 100;
+  border-radius: 5px;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
