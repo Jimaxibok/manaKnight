@@ -3,11 +3,14 @@ import MkdSDK from "./utils/MkdSDK";
 
 export const AuthContext = React.createContext();
 
+const storageUser = localStorage.getItem("user")
+const user = storageUser ? JSON.parse(storageUser) : null
+
 const initialState = {
-  isAuthenticated: false,
-  user: null,
-  token: null,
-  role: null,
+  isAuthenticated: user ? true : false,
+  user: user ? user : null,
+  token: user?.token ? user?.token : null,
+  role: user?.role ? user?.role : null,
 };
 
 const reducer = (state, action) => {
@@ -44,10 +47,18 @@ export const tokenExpireError = (dispatch, errorMessage) => {
 };
 
 export const setUser = (dispatch, user) => {
+  localStorage.setItem("user", JSON.stringify(user))
   dispatch({
     type: "LOGIN",
     payload: user
   });
+}
+
+export const logOut = () => {
+  dispatch({
+    type: "Logout",
+  });
+  window.location.href = "/" + role + "/login";
 }
 
 const AuthProvider = ({ children }) => {
