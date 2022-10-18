@@ -89,7 +89,25 @@ export default function MkdSDK() {
         }
         return jsonPaginate;
 
-      
+        case "POSTLOGIN":
+          const getLoginResult = await fetch(
+            this._baseurl + `/v2/api/lambda/login`,
+            {
+              method: "post",
+              headers: header,
+              body: JSON.stringify(payload),
+            }
+          );
+          const jsonLogin = await getLoginResult.json();
+  
+          if (jsonLogin.status === 401) {
+            throw new Error(jsonLogin.message);
+          }
+  
+          if (jsonLogin.status === 403) {
+            throw new Error(jsonLogin.message);
+          }
+          return jsonLogin;
       default:
         break;
     }
