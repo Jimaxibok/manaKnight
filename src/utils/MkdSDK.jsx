@@ -15,6 +15,13 @@ export default function MkdSDK() {
   
   this.login = async function (email, password, role) {
     //TODO
+    const payload = {
+      email, password, role
+    }
+    const res = await this.callRestAPI(payload, "POSTLOGIN")
+    if(res.error) return alert(res.message)
+
+    console.log(res)
   };
 
   this.getHeader = function () {
@@ -81,6 +88,8 @@ export default function MkdSDK() {
           throw new Error(jsonPaginate.message);
         }
         return jsonPaginate;
+
+      
       default:
         break;
     }
