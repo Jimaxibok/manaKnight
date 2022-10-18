@@ -13,15 +13,16 @@ export default function MkdSDK() {
     this._table = table;
   };
   
-  this.login = async function (email, password, role, cb) {
+  this.login = async function (email, password, role) {
     //TODO
     const payload = {
       email, password, role
     }
     const res = await this.callRestAPI(payload, "POSTLOGIN")
     if(res.error) return alert(res.message)
-    
-    cb()
+
+    return res
+
   };
 
   this.getHeader = function () {

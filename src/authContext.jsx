@@ -16,6 +16,8 @@ const reducer = (state, action) => {
       //TODO
       return {
         ...state,
+        ...action.payload,
+        isAuthenticated: true
       };
     case "LOGOUT":
       localStorage.clear();
@@ -40,6 +42,13 @@ export const tokenExpireError = (dispatch, errorMessage) => {
     window.location.href = "/" + role + "/login";
   }
 };
+
+export const setUser = (dispatch, user) => {
+  dispatch({
+    type: "LOGIN",
+    payload: user
+  });
+}
 
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
