@@ -25,10 +25,6 @@ export default function MkdSDK() {
 
   };
 
-  this.isTokenValid = async function (role) {
-    return await this.callRestAPI({ role }, "TOKENEXPIRE")
-  }
-
   this.getHeader = function () {
     return {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -140,6 +136,7 @@ export default function MkdSDK() {
 
   this.check = async function (role) {
     //TODO
+    return await this.callRestAPI({ role }, "TOKENEXPIRE")
   };
 
   return this;

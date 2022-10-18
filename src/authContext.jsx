@@ -39,7 +39,7 @@ let sdk = new MkdSDK();
 
 export const tokenExpireError = async (dispatch) => {
   const { role } = JSON.parse(localStorage.getItem("user"));
-  const { message } = await sdk.isTokenValid(role)
+  const { message } = await sdk.check(role)
   if (message === "TOKEN_EXPIRED") {
    logOut(dispatch, role)
   }

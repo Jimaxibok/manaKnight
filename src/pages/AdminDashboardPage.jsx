@@ -25,6 +25,30 @@ const AdminDashboardPage = () => {
         Dashboard 
       </div>
 
+         <div className="dashboard-container">
+            <div className='app-logout-div flex items-center justify-between m-4'>
+            <h2  className='dash-header'>APP</h2>
+            <button className="flex">
+              <img src={userIcon} alt="userIcon" />
+              <span>Logout</span>
+            </button>
+            </div>
+
+            <div className='leaderboard'>
+                <div className='today-leaderboard flex items-center justify-between m-4'>
+                  <h3>Today"s leaderboard</h3>
+
+                  <div id='sub-date' >
+                    <p>30 May 2022  <span> SUBMISSIONS OPEN </span> 11:34</p>
+                  </div>
+
+
+                </div>
+
+            </div>
+       
+           
+      </div>
     </>
   );
 };
